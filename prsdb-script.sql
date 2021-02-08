@@ -9,8 +9,8 @@ create table user (
     password varchar(30) not null,
     firstname varchar(30) not null,
     lastname varchar(30) not null, 
-    phone varchar(12),
-    email varchar(255),
+    phone varchar(12) unique,
+    email varchar(255) unique,
     isReviewer tinyint not null default 0,
     isAdmin tinyint not null default 0
 );
@@ -53,6 +53,8 @@ create table request (
 
 insert into request (description, justification, dateNeeded, userId)
 	values ('1st request', 'just because', '2021-03-01',
+			(select id from user where username = 'sa') );
+    values ('2nd request', 'because i said so', '2021-04-03',
 			(select id from user where username = 'sa') );
             
 create table product (
